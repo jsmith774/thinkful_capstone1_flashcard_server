@@ -1,13 +1,11 @@
-require('dotenv').config();
+//require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config.js');
 
-//todo for each entity 'xyz':
-//todo     const xyzRouter = require('./xyx/xyz-router');
-const sampleRouter = require('./sample/sample-router');
+const authRouter = require('./auth/auth-router');
 
 const app = express();
 
@@ -17,16 +15,11 @@ app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
 
-//todo refactor routing out of app to use xyzRouter
-//todo      remove direct routing from app
 app.get('/', (req, res) => {
-  res.send('Hello, world!');
+  res.status(200).send('Hello, world!');
 });
 
-//todo for each entity:
-//todo  use imported xyzRouter with common route path base
-//todo     app.use('/v1/xyz');
-app.use('/v1/sample', sampleRouter);
+app.use('/api/auth', authRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response;
