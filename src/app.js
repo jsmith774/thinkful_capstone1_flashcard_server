@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config.js');
 
 const authRouter = require('./auth/auth-router');
+const cardRouter = require('./cards/cards-router');
 
 const app = express();
 
@@ -20,12 +21,14 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRouter);
+app.use('/api/cards', cardRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response;
   if (NODE_ENV === 'production') {
     response = { error: { message: 'server error' } };
   } else {
+    console.log('error in router');
     console.error(error);
     response = { message: error.message, error };
   }
