@@ -7,18 +7,12 @@ const jsonBodyParser = express.json();
 cardsRouter
   .route('/')
   .get((req, res, next) => {
-    console.log("in cardsRouter.route('/').get()...");
     CardsService.getAll(req.app.get('db'))
       .then((cards) => {
-        console.log(cards);
         return res.json(cards);
         //return res.json(cards.map(CardsService.serialize));
       })
-      //.catch(next);
-      .catch(() => {
-        console.log(".then failed? db query didn't work?");
-        return next;
-      });
+      .catch(next);
   })
   .post(jsonBodyParser, (req, res, next) => {
     //todo implement POST
