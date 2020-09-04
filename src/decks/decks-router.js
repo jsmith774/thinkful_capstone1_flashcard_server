@@ -7,7 +7,15 @@ const jsonBodyParser = express.json();
 decksRouter
   .route('/')
   .get((req, res, next) => {
-    DecksService.getAll(req.app.get('db'))
+    if (req.query.userid) {
+      return DecksService.findByUserId(
+        req.app.get('db'),
+        req.query.userid
+      ).then((decks) => {
+        return res.json(decks);
+      });
+    }
+    return DecksService.getAll(req.app.get('db'))
       .then((decks) => {
         return res.json(decks);
         //return res.json(decks.map(DecksService.serialize));
