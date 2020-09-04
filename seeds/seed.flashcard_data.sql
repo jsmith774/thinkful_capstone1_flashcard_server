@@ -1,7 +1,7 @@
 BEGIN;
 
 TRUNCATE
-  flashcard
+  deck, flashcard
   RESTART IDENTITY CASCADE;
 
 
@@ -18,4 +18,12 @@ VALUES
  ('go8','https://drive.google.com/file/d/195OfhMPFqmhRrPQLacmQsuXvLV2Tg_nj/view?usp=sharing'),
  ('go9','https://drive.google.com/file/d/195OfhMPFqmhRrPQLacmQsuXvLV2Tg_nj/view?usp=sharing');
 
+
+INSERT INTO deck(deck_name) 
+VALUES
+  ('Sight words - K Set1'),
+  ('Sight words - K Set2'),
+  ('Beginning rythym patterns'),
+  ('Sight words - 1st');
+  
 COMMIT;
