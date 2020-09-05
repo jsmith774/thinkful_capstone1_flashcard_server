@@ -5,6 +5,14 @@ const CardsService = {
     return db.select('*').from('flashcard');
   },
 
+  findCardsByDeckId(db, deckId) {
+    return db
+      .select('*')
+      .from('flashcard as fc')
+      .join('deck_flashcard_link as dfl', 'dfl.flashcard_id_fk', 'fc.id')
+      .where('dfl.deck_id_fk', '=', deckId);
+  },
+
   // serializeCard(card) {
   //   return {
   //     id: card.id,
