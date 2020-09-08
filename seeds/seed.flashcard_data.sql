@@ -7,16 +7,16 @@ TRUNCATE
 
 INSERT INTO flashcard(card_prompt, card_answer)
 VALUES
- ('go','http://hhvstaffing.com/audio/go.m4a'),
- ('bunny','http://hhvstaffing.com/audio/bunny.m4a'),
- ('go2','http://hhvstaffing.com/audio/go.m4a'),
- ('go3','http://hhvstaffing.com/audio/go.m4a'),
- ('go4','http://hhvstaffing.com/audio/go.m4a'),
- ('go5','http://hhvstaffing.com/audio/go.m4a'),
- ('go6','http://hhvstaffing.com/audio/go.m4a'),
- ('go7','http://hhvstaffing.com/audio/go.m4a'),
- ('go8','http://hhvstaffing.com/audio/go.m4a'),
- ('weirdsoundmp3','http://hhvstaffing.com/audio/here_you_go_lighter.mp3');
+ ('go','https://hhvstaffing.com/audio/go.m4a'),
+ ('bunny','https://hhvstaffing.com/audio/bunny.m4a'),
+ ('go2','https://hhvstaffing.com/audio/go.m4a'),
+ ('go3','https://hhvstaffing.com/audio/go.m4a'),
+ ('go4','https://hhvstaffing.com/audio/go.m4a'),
+ ('go5','https://hhvstaffing.com/audio/go.m4a'),
+ ('go6','https://hhvstaffing.com/audio/go.m4a'),
+ ('go7','https://hhvstaffing.com/audio/go.m4a'),
+ ('go8','https://hhvstaffing.com/audio/go.m4a'),
+ ('weirdsoundmp3','https://hhvstaffing.com/audio/here_you_go_lighter.mp3');
 
 
 INSERT INTO deck(deck_name) 
