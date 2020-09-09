@@ -8,6 +8,7 @@ const { NODE_ENV } = require('./config.js');
 const authRouter = require('./auth/auth-router');
 const cardsRouter = require('./cards/cards-router');
 const decksRouter = require('./decks/decks-router');
+const usersRouter = require('./users/users-router');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRouter);
 app.use('/api/cards', cardsRouter);
 app.use('/api/decks', decksRouter);
+app.use('/api/users', usersRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response;
