@@ -23,9 +23,17 @@ decksRouter
       .catch(next);
   })
   .post(jsonBodyParser, (req, res, next) => {
-    //todo implement POST
-    console.log('IMPLEMENT POST HERE');
-    res.send(req.body);
+    const { deck_name } = req.body;
+    const newDeck = { deck_name };
+
+    for (const [key, value] of Object.entries(newDeck))
+      if (value == null)
+        return res.status(400).json({
+          error: `Missing '${key}' in request body`,
+        });
+    res
+      .status(201)
+      .json({ deck_name: deck_name, deck_id: 'from db when called/created' });
   });
 
 module.exports = decksRouter;
