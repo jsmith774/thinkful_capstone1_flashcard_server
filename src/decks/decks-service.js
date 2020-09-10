@@ -21,6 +21,26 @@ const DecksService = {
       .then(([deck]) => deck)
       .then((deck) => deck);
   },
+
+  addCards(db, deckId, cards) {
+    console.log('ADD CARDS deckid:', deckId);
+    const rows = cards.map((cardId) => ({
+      deck_id_fk: deckId,
+      flashcard_id_fk: cardId,
+    }));
+
+    return db.insert(rows).into('deck_flashcard_link');
+  },
+
+  addStudents(db, deckId, students) {
+    console.log('ADD STUDENTS deckId:', deckId);
+    const rows = students.map((studentId) => ({
+      user_id_fk: studentId,
+      deck_id_fk: deckId,
+    }));
+
+    return db.insert(rows).into('user_deck_link');
+  },
   // return db
   //     .insert(newReview)
   //     .into('thingful_reviews')

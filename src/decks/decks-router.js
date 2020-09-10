@@ -36,7 +36,18 @@ decksRouter
 
     DecksService.insertDeck(req.app.get('db'), newDeck)
       .then((deck) => {
-        res.status(201).json(deck.deck_id);
+        const deckId = deck.id;
+        DecksService.addCards(
+          req.app.get('db'),
+          deckId,
+          req.body.cards
+        ).then(() => {});
+        DecksService.addStudents(
+          req.app.get('db'),
+          deckId,
+          req.body.students
+        ).then(() => {});
+        return res.status(201).json(deck.id);
       })
       .catch(next);
   });
