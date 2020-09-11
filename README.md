@@ -1,26 +1,37 @@
-# Express Boilerplate!
+# API Server
 
-This is a boilerplate project used for starting new projects!
+## API ENDPOINTS:
 
-## Set up
+**/api/auth**
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+> POST /login
+>
+> > Retreives user from db and compares user_name/password sent from client request to values in db. If credentials match, a jwt token is created and the response returns the jwt authToken, the user role, and the user unique id
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+**/api/cards**
 
-## Scripts
+> GET /
+>
+> > Returns cards from db. If ‘deckid’ is not provided in query string, all cards are returned. If ‘deckid” is provided, only cards in the specified deck are returned
 
-Start the application `npm start`
+**/api/decks**
 
-Start nodemon for the application `npm run dev`
+> GET /
+>
+> > Returns decks from db. If ‘userid’ is not provided in query string, all decks are returned. If ‘userid’ is provided, only decks linked to the specified user are returned
 
-Run the tests `npm test`
+> POST /
+>
+> > Deck is created using specified ‘deck_name’ string from request body, and id of newly created deck is used to add specified ‘cards’ to deck and to link students with access to the ‘deck’ (‘cards’ and ‘students’ are entity id arrays from the request body and rows are added to the the appropriapirate link tables. Returns new deck id
 
-## Deploying
+**/api/users**
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+> GET /students
+>
+> > Returns all users with a role of ‘Student’
+
+## Deployment
+
+Live deployment of this API server running at <https://dry-scrubland-36737.herokuapp.com>
+
+Live demo client running on <https://client-eta-cyan.vercel.app>
