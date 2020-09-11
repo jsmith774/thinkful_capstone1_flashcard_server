@@ -3,9 +3,11 @@ const DecksService = require('./decks-service');
 
 const decksRouter = express.Router();
 const jsonBodyParser = express.json();
+const { requireAuth } = require('../middleware/jwt-auth');
 
 decksRouter
   .route('/')
+  .all(requireAuth)
   .get((req, res, next) => {
     if (req.query.userid) {
       return DecksService.findByUserId(
@@ -37,16 +39,18 @@ decksRouter
     DecksService.insertDeck(req.app.get('db'), newDeck)
       .then((deck) => {
         const deckId = deck.id;
-        DecksService.addCards(
-          req.app.get('db'),
-          deckId,
-          req.body.cards
-        ).then(() => {});
+        DecksService.addCards(req.app.get('db'), deckId, req.body.cards).then(
+          () => {
+            return;
+          }
+        );
         DecksService.addStudents(
           req.app.get('db'),
           deckId,
           req.body.students
-        ).then(() => {});
+        ).then(() => {
+          return;
+        });
         return res.status(201).json(deck.id);
       })
       .catch(next);

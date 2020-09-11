@@ -3,9 +3,11 @@ const CardsService = require('./cards-service');
 
 const cardsRouter = express.Router();
 const jsonBodyParser = express.json();
+const { requireAuth } = require('../middleware/jwt-auth');
 
 cardsRouter
   .route('/')
+  .all(requireAuth)
   .get((req, res, next) => {
     if (req.query.deckid) {
       //queryparms deckid and userid
@@ -24,11 +26,6 @@ cardsRouter
         //return res.json(cards.map(CardsService.serialize));
       })
       .catch(next);
-  })
-  .post(jsonBodyParser, (req, res, next) => {
-    //todo implement POST
-    console.log('IMPLEMENT POST HERE');
-    res.send(req.body);
   });
 
 module.exports = cardsRouter;
