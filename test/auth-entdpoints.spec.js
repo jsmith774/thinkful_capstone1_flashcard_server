@@ -6,7 +6,7 @@ const helpers = require('./test-helpers');
 describe('Auth Endpoints', function () {
   let db;
 
-  const { testUsers } = helpers.makeArticlesFixtures();
+  const { testRoles, testUsers } = helpers.makeTestFixtures();
   const testUser = testUsers[0];
 
   before('make knex instance', () => {
@@ -19,12 +19,14 @@ describe('Auth Endpoints', function () {
 
   after('disconnect from db', () => db.destroy());
 
-  //before('cleanup', () => helpers.cleanTables(db));
+  before('cleanup', () => helpers.cleanTables(db));
 
-  //afterEach('cleanup', () => helpers.cleanTables(db));
+  afterEach('cleanup', () => helpers.cleanTables(db));
 
   describe(`POST /api/auth/login`, () => {
-    //beforeEach('insert users', () => helpers.seedUsers(db, testUsers));
+    beforeEach('insert users', () =>
+      helpers.seedUsers(db, testRoles, testUsers)
+    );
 
     const requiredFields = ['user_name', 'password'];
 
@@ -83,6 +85,8 @@ describe('Auth Endpoints', function () {
         .send(userValidCreds)
         .expect(200, {
           authToken: expectedToken,
+          userRole: 'Educator',
+          userId: 1,
         });
     });
   });
