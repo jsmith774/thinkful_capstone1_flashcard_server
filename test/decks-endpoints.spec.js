@@ -2,7 +2,7 @@ const knex = require('knex');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
-describe('Cards Endpoints', function () {
+describe('Decks Endpoints', function () {
   let db;
 
   const {
@@ -29,18 +29,18 @@ describe('Cards Endpoints', function () {
 
   after('disconnect from db', () => db.destroy());
 
-  describe(`GET /api/cards`, () => {
-    context(`Given no cards`, () => {
+  describe(`GET /api/decks`, () => {
+    context(`Given no decks`, () => {
       it(`responds with 200 and an empty list`, () => {
         return supertest(app)
-          .get('/api/cards')
+          .get('/api/decks')
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
           .expect(200, []);
       });
     });
 
-    context('Given there are cards in the database', () => {
-      beforeEach('insert cards', () =>
+    context('Given there are decks in the database', () => {
+      beforeEach('insert decks', () =>
         helpers.seedCardTable(db, testFlashcards)
       );
       beforeEach('insert decks', () =>
@@ -52,27 +52,20 @@ describe('Cards Endpoints', function () {
         )
       );
 
-      it('responds with 200 and all of the cards', () => {
+      it('responds with 200 and all of the decks', () => {
         return supertest(app)
-          .get('/api/cards')
+          .get('/api/decks')
           .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
-          .expect(200, testFlashcards);
+          .expect(200, testDecks);
       });
+    });
+  });
 
-      it('responds with 200 and only cards in requested deck', () => {
-        const cardsInDeck = testFlashcards.filter((card) => {
-          if (card.card_prompt.startsWith('a')) {
-            return true;
-          } else {
-            return false;
-          }
-        });
+  describe(`POSTT /api/decks`, () => {
+    beforeEach('insert cards', () => helpers.seedCardTable(db, testFlashcards));
 
-        return supertest(app)
-          .get('/api/cards?deckid=3')
-          .set('Authorization', helpers.makeAuthHeader(testUsers[4]))
-          .expect(200, cardsInDeck);
-      });
+    it('responds with 204 and deck is added', () => {
+      return supertest(app).get('/').expect(200, 'Hello, world!');
     });
   });
 });
