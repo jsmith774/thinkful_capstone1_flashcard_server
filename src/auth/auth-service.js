@@ -4,12 +4,6 @@ const config = require('../config');
 
 const AuthService = {
   getUserWithUserName(db, user_name) {
-    //return db('registered_user').where({ user_name }).first();
-    //return db('registered_user as ru')
-    //  .join('user_role as ur', 'ur.role_id', 'ru.role_id_fk')
-    //  .select('user_name', 'full_name', 'role_name')
-    //  .where({ user_name })
-    //  .first();
     return db
       .select(
         'ru.id',

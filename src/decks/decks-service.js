@@ -1,5 +1,3 @@
-const xss = require('xss');
-
 const DecksService = {
   getAll(db) {
     return db.select('*').from('deck');
@@ -23,7 +21,6 @@ const DecksService = {
   },
 
   addCards(db, deckId, cards) {
-    console.log('ADD CARDS deckid:', deckId);
     const rows = cards.map((cardId) => ({
       deck_id_fk: deckId,
       flashcard_id_fk: cardId,
@@ -33,7 +30,6 @@ const DecksService = {
   },
 
   addStudents(db, deckId, students) {
-    console.log('ADD STUDENTS deckId:', deckId);
     const rows = students.map((studentId) => ({
       user_id_fk: studentId,
       deck_id_fk: deckId,
@@ -41,33 +37,6 @@ const DecksService = {
 
     return db.insert(rows).into('user_deck_link');
   },
-  // return db
-  //     .insert(newReview)
-  //     .into('thingful_reviews')
-  //     .returning('*')
-  //     .then(([review]) => review)
-  //     .then(review =>
-  //       ReviewsService.getById(db, review.id)
-  //     )
-
-  // const { title, content, style } = req.body
-  // +   const newArticle = { title, content, style }
-  // +   ArticlesService.insertArticle(
-  // +     req.app.get('db'),
-  // +     newArticle
-  // +   )
-  // +     .then(article => {
-  // +       res
-  // +         .status(201)
-  // +         .json(article)
-  // +     })
-  // +     .catch(next)
-
-  // serializeCard(deck) {
-  //   return {
-  //        todo xss as needed
-  //   };
-  // },
 };
 
 module.exports = DecksService;

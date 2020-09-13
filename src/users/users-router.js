@@ -12,7 +12,6 @@ usersRouter
     return UsersService.getStudents(req.app.get('db'))
       .then((students) => {
         return res.json(students);
-        //return res.json(students.map(StudentsService.serialize));
       })
       .catch(next);
   });

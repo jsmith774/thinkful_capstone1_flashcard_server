@@ -233,7 +233,6 @@ function cleanTables(db) {
     .then(() => {});
 }
 
-//function seedUsers(db, roles, users) {
 function seedUsers(db, roles, users) {
   const hashedUsers = users.map((user) => ({
     ...user,
@@ -246,7 +245,7 @@ function seedUsers(db, roles, users) {
     .then(() => {
       db.insert(hashedUsers)
         .into('registered_user')
-        .then(() => {}); //is .then needed for no return val or action?
+        .then(() => {});
     });
 }
 
