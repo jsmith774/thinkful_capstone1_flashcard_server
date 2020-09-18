@@ -1,4 +1,14 @@
+# CyberCard
+
 # API Server
+
+This repo is the server side backend for the CyberCard applicaion.
+
+## Deployment
+
+Live deployment of this API server running at <https://dry-scrubland-36737.herokuapp.com>
+
+Live demo client running on <https://client-eta-cyan.vercel.app>
 
 ## API ENDPOINTS:
 
@@ -30,8 +40,6 @@
 >
 > > Returns all users with a role of ‘Student’
 
-## Deployment
+## Tech
 
-Live deployment of this API server running at <https://dry-scrubland-36737.herokuapp.com>
-
-Live demo client running on <https://client-eta-cyan.vercel.app>
+This backend server API potion of the application utilizes Node and Express and stores/accesses data in a PostgreSQL database.
