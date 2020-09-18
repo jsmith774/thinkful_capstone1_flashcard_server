@@ -20,7 +20,6 @@ decksRouter
     return DecksService.getAll(req.app.get('db'))
       .then((decks) => {
         return res.json(decks);
-        //return res.json(decks.map(DecksService.serialize));
       })
       .catch(next);
   })
@@ -35,6 +34,12 @@ decksRouter
         });
       }
     }
+
+    /**
+     * Inserts row into deck and gets new deckId,
+     * Then uses deckId to add rows to the many-to-many link
+     *    tables for cards and students
+     */
 
     DecksService.insertDeck(req.app.get('db'), newDeck)
       .then((deck) => {
