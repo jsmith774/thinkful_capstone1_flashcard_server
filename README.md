@@ -8,7 +8,7 @@ This repo is the server side backend for the CyberCard applicaion.
 
 Live deployment of this API server running at <https://dry-scrubland-36737.herokuapp.com>
 
-Live demo client running on <https://client-eta-cyan.vercel.app>
+Live demo client running on <https://cybercard.vercel.app/>
 
 ## API ENDPOINTS:
 
